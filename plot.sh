@@ -10,4 +10,5 @@ fi
 
 gnuplot -e "filename='$1'" graph.gnuplot
 
-xdg-open graph.png
+#not compatible with colab:
+#xdg-open graph.png

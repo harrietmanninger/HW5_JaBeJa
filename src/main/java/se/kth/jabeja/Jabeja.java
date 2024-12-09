@@ -103,11 +103,11 @@ public class Jabeja {
     for (Integer nodeqId : nodes){
       //Convert Integer q to Node nodeq
       Node nodeq = entireGraph.get(nodeqId);
-      d_pp = getDegree(nodep, nodep.getColor());
-      d_qq = getDegree(nodeq, nodeq.getColor());
+      int d_pp = getDegree(nodep, nodep.getColor());
+      int d_qq = getDegree(nodeq, nodeq.getColor());
       double old_const = Math.pow(d_pp, config.getAlpha()) + Math.pow(d_qq, config.getAlpha());
-      d_pq = getDegree(nodep, nodeq.getColor());
-      d_qp = getDegree(nodeq, nodep.getColor());
+      int d_pq = getDegree(nodep, nodeq.getColor());
+      int d_qp = getDegree(nodeq, nodep.getColor());
       double new_const = Math.pow(d_pq, config.getAlpha()) + Math.pow(d_qp, config.getAlpha());
       if (((new_const*config.getTemperature()) > old_const)&&(new_const>highestBenefit)){
         bestPartner = nodeq;

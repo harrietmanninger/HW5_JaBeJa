@@ -89,6 +89,7 @@ public class Jabeja {
       partners_color = partner.getColor();
       nodep.setColor(partners_color);
       partner.setColor(current_color);
+      numberOfSwaps++;
     }
   }
 

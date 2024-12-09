@@ -64,6 +64,10 @@ public class Jabeja {
     Node partner = null;
     Node nodep = entireGraph.get(nodeId);
 
+    // Declare variables for swapping colors:
+    int current_color = nodep.getColor(); 
+    int partners_color = 0; 
+
     if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.LOCAL) {
       // swap with random neighbors
@@ -75,14 +79,13 @@ public class Jabeja {
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.RANDOM) {
       // if local policy fails then randomly sample the entire graph
       // TODO
-      partner = findPartner(nodeId, getSample(nodep));
+      partner = findPartner(nodeId, getSample(nodeId));
     }
 
     
     // swap the colors
     // TODO
     if (partner != null) {
-      current_color = nodep.getColor();
       partners_color = partner.getColor();
       nodep.setColor(partners_color);
       partner.setColor(current_color);

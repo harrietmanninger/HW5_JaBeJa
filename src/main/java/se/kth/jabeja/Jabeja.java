@@ -110,7 +110,7 @@ public class Jabeja {
       int d_pq = getDegree(nodep, nodeq.getColor());
       int d_qp = getDegree(nodeq, nodep.getColor());
       double new_const = Math.pow(d_pq, config.getAlpha()) + Math.pow(d_qp, config.getAlpha());
-      if (((new_const*config.getTemperature()) > old_const)&&(new_const>highestBenefit)){
+      if (((new_const*T) > old_const)&&(new_const>highestBenefit)){
         bestPartner = nodeq;
         highestBenefit = new_const;
       }

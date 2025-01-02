@@ -55,7 +55,7 @@ public class Jabeja {
     // TODO for second task
     float T_min = 0.00001f;
     //float aplha2 = 0.9f;
-    float aplha2 = 0.8f;
+    float aplha2 = 0.99f;
     if(T > T_min)
       T *= aplha2;
     //old version:

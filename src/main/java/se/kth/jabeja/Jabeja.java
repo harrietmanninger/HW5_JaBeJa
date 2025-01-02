@@ -75,8 +75,6 @@ public class Jabeja {
     Node partner = null;
     Node nodep = entireGraph.get(nodeId);
 
-    Node partner = null;
-
     if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.LOCAL) {
       // swap with random neighbors

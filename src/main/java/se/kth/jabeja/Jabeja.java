@@ -31,16 +31,12 @@ public class Jabeja {
     //this.T = config.getTemperature();
     //System.out.println("Initial Temperature (T) (should be 1): " + this.T);
     this.T = 1;
-    this.T_min = 0.00001;
-    this.aplha2 = 0.9;
   }
 
 
   //-------------------------------------------------------------------
   public void startJabeja() throws IOException {
     for (round = 0; round < config.getRounds(); round++) {
-      //ska jag bara repetera så länge T > T_min för task 2?
-      //antagligen inte
       for (int id : entireGraph.keySet()) {
         sampleAndSwap(id);
       }
@@ -57,6 +53,8 @@ public class Jabeja {
    */
   private void saCoolDown(){
     // TODO for second task
+    float T_min = 0.00001;
+    float aplha2 = 0.9;
     if(T > T_min)
       T *= aplha2;
     //old version:

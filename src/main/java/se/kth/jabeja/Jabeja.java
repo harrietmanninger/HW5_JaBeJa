@@ -28,12 +28,18 @@ public class Jabeja {
     this.numberOfSwaps = 0;
     this.config = config;
     this.T = config.getTemperature();
+    //for second task, max init T is 1:
+    //System.out.println("Initial Temperature (T): " + this.T);
+    //this.T_min = 0.00001;
+    //this.aplha2 = 0.9;
   }
 
 
   //-------------------------------------------------------------------
   public void startJabeja() throws IOException {
     for (round = 0; round < config.getRounds(); round++) {
+      //ska jag bara repetera så länge T > T_min för task 2?
+      //antagligen inte
       for (int id : entireGraph.keySet()) {
         sampleAndSwap(id);
       }
@@ -50,10 +56,15 @@ public class Jabeja {
    */
   private void saCoolDown(){
     // TODO for second task
+    //if(T > T_min)
+     // T *= aplha2;
+    //old version:
+    
     if (T > 1)
       T -= config.getDelta();
     if (T < 1)
       T = 1;
+      
   }
 
   /**
@@ -64,9 +75,7 @@ public class Jabeja {
     Node partner = null;
     Node nodep = entireGraph.get(nodeId);
 
-    // Declare variables for swapping colors:
-    int current_color = nodep.getColor(); 
-    int partners_color = 0; 
+    Node partner = null;
 
     if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.LOCAL) {
@@ -79,14 +88,17 @@ public class Jabeja {
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.RANDOM) {
       // if local policy fails then randomly sample the entire graph
       // TODO
-      partner = findPartner(nodeId, getSample(nodeId));
+      if (partner==null){
+        partner = findPartner(nodeId, getSample(nodeId));
+      }
     }
 
     
     // swap the colors
     // TODO
     if (partner != null) {
-      partners_color = partner.getColor();
+      int current_color = nodep.getColor(); 
+      int partners_color = partner.getColor();
       nodep.setColor(partners_color);
       partner.setColor(current_color);
       numberOfSwaps++;
@@ -100,7 +112,18 @@ public class Jabeja {
     Node bestPartner = null;
     double highestBenefit = 0;
 
+    // Also to change for task 2:
+    // the constelation/new_const/old_const is equivalent to the cost function
+    // solution is basically input to cost function
+    // dont understand if I should keep the old requirement for updating 
+    // best partner end highest benefot or not. Jag tror jag ska ändra till nya, 
+    // dvs använda ap > random istället. Så lär inte anv highest benefit längre
+    // solution måste jag ju alltid uppdatera men kan uppd old cost och best partner utefter
+    // ap > random ?
+    // (fortsätt med att bara returnera bestPartner)
+
     // TODO
+    // Version of task 1:
     for (Integer nodeqId : nodes){
       //Convert Integer q to Node nodeq
       Node nodeq = entireGraph.get(nodeqId);

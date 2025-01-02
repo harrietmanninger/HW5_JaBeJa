@@ -27,11 +27,12 @@ public class Jabeja {
     this.round = 0;
     this.numberOfSwaps = 0;
     this.config = config;
-    this.T = config.getTemperature();
     //for second task, max init T is 1:
-    //System.out.println("Initial Temperature (T): " + this.T);
-    //this.T_min = 0.00001;
-    //this.aplha2 = 0.9;
+    //this.T = config.getTemperature();
+    //System.out.println("Initial Temperature (T) (should be 1): " + this.T);
+    this.T = 1;
+    this.T_min = 0.00001;
+    this.aplha2 = 0.9;
   }
 
 
@@ -56,14 +57,14 @@ public class Jabeja {
    */
   private void saCoolDown(){
     // TODO for second task
-    //if(T > T_min)
-     // T *= aplha2;
+    if(T > T_min)
+      T *= aplha2;
     //old version:
     
-    if (T > 1)
+    /**if (T > 1)
       T -= config.getDelta();
     if (T < 1)
-      T = 1;
+      T = 1; */
       
   }
 
@@ -131,13 +132,38 @@ public class Jabeja {
       int d_pq = getDegree(nodep, nodeq.getColor());
       int d_qp = getDegree(nodeq, nodep.getColor());
       double new_const = Math.pow(d_pq, config.getAlpha()) + Math.pow(d_qp, config.getAlpha());
+      
+      //Task 1:
+      /** 
       if (((new_const*T) > old_const)&&(new_const>highestBenefit)){
+        bestPartner = nodeq;
+        highestBenefit = new_const;
+      }*/
+     //Task 2:
+     double ap = acceptanceProbability(old_const, new_const, T);
+     double randomComp = Math.random();
+     if ((ap > randomComp)&&(new_const>highestBenefit)){
         bestPartner = nodeq;
         highestBenefit = new_const;
       }
     }
 
     return bestPartner;
+  }
+
+  private double acceptanceProbability(double old_const, double new_const, float T){
+    // Katarina EG:
+    // ap = exp((new_cost-old_cost)/T)
+    // where the foundational condition is to move to new solution
+    // if new_cost<old_cost
+    // However, JabeJa uses a reversed logic, moves to new sollution
+    // if new>old (they dont exactly represent the cost/energy)
+    //I'll also try the opposite: ap = exp((old_cost-new_cost)/T)
+
+    //double exp_1 = (new_const-old_const)/T;
+    double exp_2 = (old_const-new_const)/T;
+    double ap = Math.exp(exp_2);
+    return ap;
   }
 
   /**

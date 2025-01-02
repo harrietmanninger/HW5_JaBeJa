@@ -55,8 +55,8 @@ public class Jabeja {
     // TODO for second task
     float T_min = 0.00001f;
     //float T_min = 0.001f;
-    float aplha2 = 0.9f;
-    //float aplha2 = 0.99f;
+    //float aplha2 = 0.9f;
+    float aplha2 = 0.8f;
     if(T > T_min)
       T *= aplha2;
     
@@ -139,13 +139,13 @@ public class Jabeja {
         bestPartner = nodeq;
         highestBenefit = new_const;
       }*/
-     //Task 2:
-     double ap = acceptanceProbability(old_const, new_const, T);
-     double randomComp = Math.random();
-     //if ((ap > randomComp)&&(new_const>highestBenefit)){
-     if (ap > randomComp){
-        bestPartner = nodeq;
-        highestBenefit = new_const;
+      //Task 2:
+      double ap = acceptanceProbability(old_const, new_const, T);
+      double randomComp = Math.random();
+      if ((ap > randomComp)&&(new_const>highestBenefit)){
+      //if (ap > randomComp){
+         bestPartner = nodeq;
+         highestBenefit = new_const;
       }
     }
 

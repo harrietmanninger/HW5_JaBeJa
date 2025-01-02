@@ -142,7 +142,8 @@ public class Jabeja {
      //Task 2:
      double ap = acceptanceProbability(old_const, new_const, T);
      double randomComp = Math.random();
-     if ((ap > randomComp)&&(new_const>highestBenefit)){
+     //if ((ap > randomComp)&&(new_const>highestBenefit)){
+     if (ap > randomComp){
         bestPartner = nodeq;
         highestBenefit = new_const;
       }

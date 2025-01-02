@@ -161,9 +161,9 @@ public class Jabeja {
     // if new>old (they dont exactly represent the cost/energy)
     //I'll also try the opposite: ap = exp((old_cost-new_cost)/T)
 
-    //double exp_1 = (new_const-old_const)/T;
-    double exp_2 = (old_const-new_const)/T;
-    double ap = Math.exp(exp_2);
+    double exp_1 = (new_const-old_const)/T;
+    //double exp_2 = (old_const-new_const)/T;
+    double ap = Math.exp(exp_1);
     return ap;
   }
 

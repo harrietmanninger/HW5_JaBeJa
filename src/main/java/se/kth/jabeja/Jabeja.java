@@ -29,9 +29,11 @@ public class Jabeja {
     this.numberOfSwaps = 0;
     this.config = config;
     //for second task, max init T is 1:
-    //this.T = config.getTemperature();
-    //System.out.println("Initial Temperature (T) (should be 1): " + this.T);
-    this.T = 1;
+    this.T = config.getTemperature();
+    System.out.println("Initial Temperature (T): " + this.T);
+    System.out.println("original delta: " + config.getDelta());
+    //Task 2.1:
+    //this.T = 1;
   }
 
 
@@ -54,18 +56,20 @@ public class Jabeja {
    */
   private void saCoolDown(){
     // TODO for second task
+    // Task 2.1
+    /** 
     float T_min = 0.00001f;
     //float T_min = 0.001f;
     //float aplha2 = 0.9f;
-    float aplha2 = 0.99f;
+    float aplha2 = 0.8f;
     if(T > T_min)
       T *= aplha2;
-    
-    //old version:
-    /**if (T > 1)
+    */
+    //Task 1 and 2.2:
+    if (T > 1)
       T -= config.getDelta();
     if (T < 1)
-      T = 1; */
+      T = 1; 
       
   }
 
@@ -113,7 +117,6 @@ public class Jabeja {
     double highestBenefit = 0;
 
     // TODO
-    // Version of task 1:
     for (Integer nodeqId : nodes){
       //Convert Integer q to Node nodeq
       Node nodeq = entireGraph.get(nodeqId);
@@ -124,13 +127,13 @@ public class Jabeja {
       int d_qp = getDegree(nodeq, nodep.getColor());
       double new_const = Math.pow(d_pq, config.getAlpha()) + Math.pow(d_qp, config.getAlpha());
       
-      //Task 1:
-      /** 
+      //Task 1 and 2.2:
+      
       if (((new_const*T) > old_const)&&(new_const>highestBenefit)){
         bestPartner = nodeq;
         highestBenefit = new_const;
-      }*/
-      //Task 2:
+      }
+      //Task 2.1:
       /**Katarina EG simulated annealing:
        * If new_const>old_const, definitelly use new solution
        * Else if new_const<old_const, maybe use new solution
@@ -141,13 +144,13 @@ public class Jabeja {
        * (this way, the choice of partner can sometimes preceed to a worse new solution
        * in order to not get stuck in local minima)
       */
+     /** 
       double ap = acceptanceProbability(old_const, new_const, T);
       double randomComp = Math.random();
-      //if ((ap > randomComp)&&(new_const>highestBenefit)){
       if (ap > randomComp){
          bestPartner = nodeq;
-         //highestBenefit = new_const;
       }
+      */
     }
     return bestPartner;
   }

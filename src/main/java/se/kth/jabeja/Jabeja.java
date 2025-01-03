@@ -28,11 +28,11 @@ public class Jabeja {
     this.round = 0;
     this.numberOfSwaps = 0;
     this.config = config;
-    //this.T = config.getTemperature();
+    this.T = config.getTemperature();
     //Task 2.2:
     System.out.println("Initial Temperature (T): " + this.T);
     System.out.println("original delta: " + config.getDelta());
-    this.T = 3;
+    //this.T = 3;
     //Initial Temperature (T): 2.0
     //original delta: 0.003
     //Task 2.1:
@@ -52,7 +52,7 @@ public class Jabeja {
      */
     for (round = 0; round < config.getRounds(); round++) {
       if (round == 500){
-        T = 3;
+        T = config.getTemperature();
       }
       for (int id : entireGraph.keySet()) {
         sampleAndSwap(id);

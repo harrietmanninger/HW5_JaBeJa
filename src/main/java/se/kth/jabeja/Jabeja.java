@@ -1,3 +1,4 @@
+
 package se.kth.jabeja;
 
 import org.apache.log4j.Logger;
@@ -53,10 +54,10 @@ public class Jabeja {
    */
   private void saCoolDown(){
     // TODO for second task
-    //float T_min = 0.00001f;
-    float T_min = 0.001f;
-    float aplha2 = 0.9f;
-    //float aplha2 = 0.99f;
+    float T_min = 0.00001f;
+    //float T_min = 0.001f;
+    //float aplha2 = 0.9f;
+    float aplha2 = 0.8f;
     if(T > T_min)
       T *= aplha2;
     
@@ -111,16 +112,6 @@ public class Jabeja {
     Node bestPartner = null;
     double highestBenefit = 0;
 
-    // Also to change for task 2:
-    // the constelation/new_const/old_const is equivalent to the cost function
-    // solution is basically input to cost function
-    // dont understand if I should keep the old requirement for updating 
-    // best partner end highest benefot or not. Jag tror jag ska ändra till nya, 
-    // dvs använda ap > random istället. Så lär inte anv highest benefit längre
-    // solution måste jag ju alltid uppdatera men kan uppd old cost och best partner utefter
-    // ap > random ?
-    // (fortsätt med att bara returnera bestPartner)
-
     // TODO
     // Version of task 1:
     for (Integer nodeqId : nodes){
@@ -140,30 +131,31 @@ public class Jabeja {
         highestBenefit = new_const;
       }*/
       //Task 2:
+      /**Katarina EG simulated annealing:
+       * If new_const>old_const, definitelly use new solution
+       * Else if new_const<old_const, maybe use new solution
+       * This works because ap is always > 1, and therefore > randomComp,
+       * if new_const>old_const (see the acceptanceProbability function)
+       * however, if new_const<old_const, 0<ap<1 and therefore it 
+       * being accepted depends on the uniform probability that randomComp<ap
+       * (this way, the choice of partner can sometimes preceed to a worse new solution
+       * in order to not get stuck in local minima)
+      */
       double ap = acceptanceProbability(old_const, new_const, T);
       double randomComp = Math.random();
-      if ((ap > randomComp)&&(new_const>highestBenefit)){
-      //if (ap > randomComp){
+      //if ((ap > randomComp)&&(new_const>highestBenefit)){
+      if (ap > randomComp){
          bestPartner = nodeq;
-         highestBenefit = new_const;
+         //highestBenefit = new_const;
       }
     }
-
     return bestPartner;
   }
 
   private double acceptanceProbability(double old_const, double new_const, float T){
-    // Katarina EG:
-    // ap = exp((new_cost-old_cost)/T)
-    // where the foundational condition is to move to new solution
-    // if new_cost<old_cost
-    // However, JabeJa uses a reversed logic, moves to new sollution
-    // if new>old (they dont exactly represent the cost/energy)
-    //I'll also try the opposite: ap = exp((old_cost-new_cost)/T)
 
-    double exp_1 = (new_const-old_const)/T;
-    //double exp_2 = (old_const-new_const)/T;
-    double ap = Math.exp(exp_1);
+    double exp = (new_const-old_const)/T;
+    double ap = Math.exp(exp);
     return ap;
   }
 

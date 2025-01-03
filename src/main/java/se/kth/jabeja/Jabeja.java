@@ -28,10 +28,12 @@ public class Jabeja {
     this.round = 0;
     this.numberOfSwaps = 0;
     this.config = config;
-    //for second task, max init T is 1:
     this.T = config.getTemperature();
+    //Task 2.2:
     System.out.println("Initial Temperature (T): " + this.T);
     System.out.println("original delta: " + config.getDelta());
+    //Initial Temperature (T): 2.0
+    //original delta: 0.003
     //Task 2.1:
     //this.T = 1;
   }
@@ -39,7 +41,18 @@ public class Jabeja {
 
   //-------------------------------------------------------------------
   public void startJabeja() throws IOException {
+    /**
+     * Task 2.2:
+     * 3elt converges after 350 rounds, try restarting simulated annealing
+     * after 700 rounds, i.e. reset T to original temperature (2)
+     * same w add20
+     * (or at 630/640/650 so it has time to converge)
+     * twitter converges after approx 230 rounds, try restarting after 460rounds
+     */
     for (round = 0; round < config.getRounds(); round++) {
+      if (round == 630){
+        T = config.getTemperature();
+      }
       for (int id : entireGraph.keySet()) {
         sampleAndSwap(id);
       }
@@ -97,7 +110,6 @@ public class Jabeja {
       }
     }
 
-    
     // swap the colors
     // TODO
     if (partner != null) {

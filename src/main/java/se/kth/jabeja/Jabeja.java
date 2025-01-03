@@ -32,7 +32,7 @@ public class Jabeja {
     //Task 2.2:
     System.out.println("Initial Temperature (T): " + this.T);
     System.out.println("original delta: " + config.getDelta());
-    this.T = 4.5f;
+    this.T = 3;
     //Initial Temperature (T): 2.0
     //original delta: 0.003
     //Task 2.1:
@@ -51,9 +51,9 @@ public class Jabeja {
      * twitter converges after approx 230 rounds, try restarting after 460rounds
      */
     for (round = 0; round < config.getRounds(); round++) {
-      /**if ((round == 500)){
-        T = config.getTemperature();
-      }*/
+      if (round == 500){
+        T = 3;
+      }
       for (int id : entireGraph.keySet()) {
         sampleAndSwap(id);
       }
@@ -81,7 +81,7 @@ public class Jabeja {
     */
     //Task 1 and 2.2:
     //float delta2 = 0.002f;
-    float delta2 = 0.004f;
+    float delta2 = 0.00225f;
     if (T > 1)
       //T -= config.getDelta();
       T -= delta2;

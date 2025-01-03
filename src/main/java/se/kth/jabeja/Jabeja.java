@@ -32,7 +32,7 @@ public class Jabeja {
     //Task 2.2:
     System.out.println("Initial Temperature (T): " + this.T);
     System.out.println("original delta: " + config.getDelta());
-    this.T = 3;
+    this.T = 3.5f;
     //Initial Temperature (T): 2.0
     //original delta: 0.003
     //Task 2.1:

@@ -51,9 +51,9 @@ public class Jabeja {
      * twitter converges after approx 230 rounds, try restarting after 460rounds
      */
     for (round = 0; round < config.getRounds(); round++) {
-      if (round == 550){
+      /**if (round == 550){
         T = config.getTemperature();
-      }
+      }*/
       for (int id : entireGraph.keySet()) {
         sampleAndSwap(id);
       }

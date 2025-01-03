@@ -81,10 +81,10 @@ public class Jabeja {
     */
     //Task 1 and 2.2:
     //float delta2 = 0.002f;
-    float delta2 = 0.0025f;
+    //float delta2 = 0.0025f;
     if (T > 1)
-      //T -= config.getDelta();
-      T -= delta2;
+      T -= config.getDelta();
+      //T -= delta2;
     if (T < 1)
       T = 1; 
       
